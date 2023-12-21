@@ -12,6 +12,7 @@ import '@grapecity/spread-sheets-pivot-addon'
 // 注意：spread-sheets-tablesheet 与 spread-sheets-ganttsheet 的先后顺序
 import '@grapecity/spread-sheets-tablesheet'
 import '@grapecity/spread-sheets-ganttsheet'
+import '@grapecity/spread-sheets-reportsheet-addon'
 import '@grapecity/spread-sheets-formula-panel'
 import '@grapecity/spread-sheets-io'
 import '@grapecity/spread-sheets-resources-zh'
