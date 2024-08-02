@@ -1,30 +1,42 @@
 <script setup>
-import '@grapecity/spread-sheets/styles/gc.spread.sheets.excel2013white.css'
-import GC from '@grapecity/spread-sheets'
-import '@grapecity/spread-sheets-shapes'
-import '@grapecity/spread-sheets-charts'
-import '@grapecity/spread-sheets-slicers'
-import '@grapecity/spread-sheets-print'
-import '@grapecity/spread-sheets-barcode'
-import '@grapecity/spread-sheets-pdf'
-import '@grapecity/spread-sheets-pivot-addon'
-import '@grapecity/spread-sheets-tablesheet'
-import '@grapecity/spread-sheets-ganttsheet'
-import '@grapecity/spread-sheets-formula-panel'
-import '@grapecity/spread-sheets-reportsheet-addon'
-import '@grapecity/spread-sheets-io'
-import '@grapecity/spread-excelio'
-import '@grapecity/spread-sheets-resources-zh'
-import { GcSpreadSheets } from '@grapecity/spread-sheets-vue'
+import '@grapecity-software/spread-sheets/styles/gc.spread.sheets.excel2013white.css'
+import GC from '@grapecity-software/spread-sheets'
+import '@grapecity-software/spread-sheets-shapes'
+import '@grapecity-software/spread-sheets-charts'
+import '@grapecity-software/spread-sheets-slicers'
+import '@grapecity-software/spread-sheets-print'
+import '@grapecity-software/spread-sheets-barcode'
+import '@grapecity-software/spread-sheets-pdf'
+import '@grapecity-software/spread-sheets-pivot-addon'
+import '@grapecity-software/spread-sheets-tablesheet'
+import '@grapecity-software/spread-sheets-ganttsheet'
+import '@grapecity-software/spread-sheets-formula-panel'
+import '@grapecity-software/spread-sheets-reportsheet-addon'
+import '@grapecity-software/spread-sheets-io'
+import '@grapecity-software/spread-excelio'
+import '@grapecity-software/spread-sheets-resources-zh'
+import { GcSpreadSheets } from '@grapecity-software/spread-sheets-vue'
+import { ref, onMounted } from "vue";
 
 GC.Spread.Common.CultureManager.culture('zh-cn')
 
+// 引用SpreadJS的宿主Dom元素
+const spreadContainerRef = ref(null)
+
+// 这里不要使用ref
 let spread
 let sheet
-const initSpread = (value) => {
-  spread = value
+
+onMounted(() => {
+  spread = new GC.Spread.Sheets.Workbook(spreadContainerRef.value)
   sheet = spread.getActiveSheet()
 
+  // 为方便调试引入下方代码，生产环境请移除
+  window.GC = GC
+  window.spread = spread
+  window.sheet = sheet
+
+  // 业务逻辑，不一定写在这里，可以写在其他地方
   sheet
     .getCell(0, 0)
     .value('当前为 Spread 示例，点击下方链接跳转到 Designer 示例')
@@ -36,16 +48,11 @@ const initSpread = (value) => {
     .value('./designer')
     .hAlign(GC.Spread.Sheets.HorizontalAlign.left)
   sheet.autoFitColumn(0)
-
-  // 为方便调试引入下方代码，生产环境请移除
-  window.GC = GC
-  window.spread = spread
-  window.sheet = sheet
-}
+})
 </script>
 
 <template>
-  <gc-spread-sheets id="spread-container" @workbookInitialized="initSpread" />
+  <div id="spread-container" ref="spreadContainerRef"></div>
 </template>
 
 <style scoped>
