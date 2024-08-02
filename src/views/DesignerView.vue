@@ -19,7 +19,6 @@ import '@grapecity-software/spread-sheets-resources-zh'
 // 注意：spread-sheets-designer-resources-cn 与 spread-sheets-designer 的先后顺序
 import '@grapecity-software/spread-sheets-designer-resources-cn'
 import '@grapecity-software/spread-sheets-designer'
-import GcSpreadSheetsDesigner from '@grapecity-software/spread-sheets-designer-vue'
 import {ref, onMounted} from "vue";
 
 GC.Spread.Common.CultureManager.culture('zh-cn')

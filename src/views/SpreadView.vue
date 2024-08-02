@@ -15,7 +15,6 @@ import '@grapecity-software/spread-sheets-reportsheet-addon'
 import '@grapecity-software/spread-sheets-io'
 import '@grapecity-software/spread-excelio'
 import '@grapecity-software/spread-sheets-resources-zh'
-import { GcSpreadSheets } from '@grapecity-software/spread-sheets-vue'
 import { ref, onMounted } from "vue";
 
 GC.Spread.Common.CultureManager.culture('zh-cn')
